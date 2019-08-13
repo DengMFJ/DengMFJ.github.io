@@ -158,8 +158,59 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="title-list安全删除"><a href="#title-list安全删除" class="headerlink" title="title:list安全删除"></a>title:list安全删除</h2><p>[import java.util.ArrayList;<br>import java.util.Iterator;<br>import java.util.List;<br>import java.util.concurrent.CopyOnWriteArrayList;</p>
-<p>public class ListDemo {<br>    public static void main(String[] args) {<br>        List<string> list = new ArrayList&lt;&gt;();<br>        list.add(“11”);<br>        list.add(“22”);<br>        list.add(“22”);<br>        list.add(“33”);<br>        list.add(“44”);<br>        System.out.println(list);<br>        //remove(list,”22”);<br>        List list1 = copyOnWriteArrayListRemove(list, “22”);<br>        System.out.println(list1);<br>    }<br>    //错误 java.util.ConcurrentModificationException 会产生并发问题<br>   /* private static void remove(List<string> list, String s) {<br>        for (String s1 : list) {<br>            if(s.equals(s1)){<br>                list.remove(s1);<br>            }<br>        }<br>    }<em>/<br>    //错误 删除不完整 运行结果[11, 22, 33, 44] s=”22”<br>    //(1)index 0   1   2   3   4<br>    //原因 由于[11, 22, 22, 33, 44]集合开始长度为5，当集合遍历到1时,item=”22”进行删除该元素，<br>    //           (2)index       0   1   2   3<br>    // 并且该集合元素总体往前挪一位[11, 22, 33, 44] i=1 ===&gt;&gt; i++之后 i = 2；所以item得到的值 list.get(i)为”33”把第二个”22”给忽略掉<br>    /*private static void remove(List<string> list, String s) {<br>        for(int i = 0; i &lt; list.size(); i++){<br>            String item = list.get(i);<br>            if(s.equals(item)){<br>                list.remove(item);<br>            }<br>        }<br>    }</string></em>/<br>    //正确 运行结果[11, 33, 44]<br>    /<em>private static void remove(List<string> list, String s) {<br>        Iterator<string> iterator = list.iterator();<br>        while(iterator.hasNext()){<br>            String s1 = iterator.next();<br>            if(s.equals(s1)){<br>                iterator.remove();<br>            }<br>        }<br>    }</string></string></em>/<br>    //正确 运行结果[11, 33, 44]<br>    /<em>private static void remove(List<string> list, String s) {<br>        for (int i = list.size() - 1; i &gt;= 0; i–){<br>            String s1 = list.get(i);<br>            if (s.equals(s1)){<br>                list.remove(s);<br>            }<br>        }<br>    }</string></em>/<br>    //正确 java8 使用lambda表达式删除列表元素 运行结果[11, 33, 44]<br>    /<em>private static void remove(List<string> list, String s) {<br>        //lambda表达式的方法<br>       list.removeIf(e -&gt; s.equals(e));<br>    }</string></em>/<br>    //正确 运行结果[11, 33, 44]<br>    private static List copyOnWriteArrayListRemove(List<string> list, String s){<br>        CopyOnWriteArrayList<string> cList = new CopyOnWriteArrayList&lt;&gt;(list);<br>        for (String s1 : cList) {<br>            if (s.equals(s1)){<br>                cList.remove(s1);<br>            }<br>        }<br>       return cList;<br>    }<br>}]</string></string></string></string></p>
+<h2 id="title-list安全删除"><a href="#title-list安全删除" class="headerlink" title="title:list安全删除"></a>title:list安全删除</h2><p>[<br>public class ListDemo {<br>    public static void main(String[] args) {<br>        List<string> list = new ArrayList&lt;&gt;();<br>        list.add(“11”);<br>        list.add(“22”);<br>        list.add(“22”);<br>        list.add(“33”);<br>        list.add(“44”);<br>        System.out.println(list);<br>        //remove(list,”22”);<br>        List list1 = copyOnWriteArrayListRemove(list, “22”);<br>        System.out.println(list1);<br>    }]</string></p>
+<pre><code>[//错误 java.util.ConcurrentModificationException 会产生并发问题</code></pre><p>   /* private static void remove(List<string> list, String s) {<br>        for (String s1 : list) {<br>            if(s.equals(s1)){<br>                list.remove(s1);<br>            }<br>        }<br>    }*/]</string></p>
+<pre><code>[//错误 删除不完整 运行结果[11, 22, 33, 44] s=&quot;22&quot;
+//(1)index 0   1   2   3   4
+//原因 由于[11, 22, 22, 33, 44]集合开始长度为5，当集合遍历到1时,item=&quot;22&quot;进行删除该元素，
+//           (2)index       0   1   2   3
+// 并且该集合元素总体往前挪一位[11, 22, 33, 44] i=1 ===&gt;&gt; i++之后 i = 2；所以item得到的值 list.get(i)为&quot;33&quot;把第二个&quot;22&quot;给忽略掉
+/*private static void remove(List&lt;String&gt; list, String s) {
+    for(int i = 0; i &lt; list.size(); i++){
+        String item = list.get(i);
+        if(s.equals(item)){
+            list.remove(item);
+        }
+    }
+}*/]
+
+[//正确 运行结果[11, 33, 44]
+/*private static void remove(List&lt;String&gt; list, String s) {
+    Iterator&lt;String&gt; iterator = list.iterator();
+    while(iterator.hasNext()){
+        String s1 = iterator.next();
+        if(s.equals(s1)){
+            iterator.remove();
+        }
+    }
+}*/]
+
+[//正确 运行结果[11, 33, 44]
+/*private static void remove(List&lt;String&gt; list, String s) {
+    for (int i = list.size() - 1; i &gt;= 0; i--){
+        String s1 = list.get(i);
+        if (s.equals(s1)){
+            list.remove(s);
+        }
+    }
+}*/]
+
+[//正确 java8 使用lambda表达式删除列表元素 运行结果[11, 33, 44]
+/*private static void remove(List&lt;String&gt; list, String s) {
+    //lambda表达式的方法
+   list.removeIf(e -&gt; s.equals(e));
+}*/]
+
+[//正确 运行结果[11, 33, 44]
+private static List copyOnWriteArrayListRemove(List&lt;String&gt; list, String s){
+    CopyOnWriteArrayList&lt;String&gt; cList = new CopyOnWriteArrayList&lt;&gt;(list);
+    for (String s1 : cList) {
+        if (s.equals(s1)){
+            cList.remove(s1);
+        }
+    }
+   return cList;
+}</code></pre><p>}]</p>
 
       
 
