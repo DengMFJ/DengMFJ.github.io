@@ -292,7 +292,7 @@
       
         <pre><code>@profile作用：可根据项目或开发者需求定制允许开发人员指定特定的组件来注册
 Demo
-[@Configuration
+@Configuration
 /*@Import(RedisConfig.class)*/
 /*@Profile(&quot;dev&quot;)*/
 public class SpringConfig {
@@ -308,7 +308,6 @@ public class SpringConfig {
         clientService.setClientDao(clientDao());
         return clientService;
     }
-
     @Bean
     @Profile(&quot;dev&quot;)
     public ClientService clientService1(){
@@ -316,20 +315,16 @@ public class SpringConfig {
         clientService1.setClientDao(clientDao());
         return clientService1;
     }
-}]
+}
 测试代码没有激活&quot;dev&quot;
-[
     public static void main(String[] args) throws SQLException {
-
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(SpringConfig.class);
         context.refresh();
-
         //dataSourceTest(context);
         //redisTest(context);
         //System.out.println(getValueByRedis(context));
         getBeanNames(context);
-
     }
     public static void getBeanNames(AnnotationConfigApplicationContext context){
         String[] names = context.getBeanDefinitionNames();
@@ -337,9 +332,9 @@ public class SpringConfig {
         for (String name : names) {
             System.out.println(name);
         }
-    }]
+    }
     测试结果
-    [
+
         bean的总数：7
         org.springframework.context.annotation.internalConfigurationAnnotationProcessor
         org.springframework.context.annotation.internalAutowiredAnnotationProcessor
@@ -348,9 +343,9 @@ public class SpringConfig {
         org.springframework.context.event.internalEventListenerProcessor
         org.springframework.context.event.internalEventListenerFactory
         springConfig
-    ]
+
     测试代码激活&quot;dev&quot;
-    [
+
         bean的总数：10
         org.springframework.context.annotation.internalConfigurationAnnotationProcessor
         org.springframework.context.annotation.internalAutowiredAnnotationProcessor
