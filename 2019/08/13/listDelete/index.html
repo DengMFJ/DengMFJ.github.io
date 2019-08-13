@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://DengMFJ.github.io.">
-  <title>spring之@profile注解 | WWelcome to my blog</title>
+  <title>WWelcome to my blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="@profile作用：可根据项目或开发者需求定制允许开发人员指定特定的组件来注册 Demo [@Configuration /*@Import(RedisConfig.class)*/ /*@Profile(&amp;quot;dev&amp;quot;)*/ public class SpringConfig {     @Bean     @Profile(&amp;quot;dev&amp;quot;)     publi">
+  <meta name="description" content="title:list安全删除import java.util.ArrayList;import java.util.Iterator;import java.util.List;import java.util.concurrent.CopyOnWriteArrayList; public class ListDemo {    public static void main(String[]">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spring之@profile注解">
-<meta property="og:url" content="https://DengMFJ.github.io./2019/08/12/SpringProfile/index.html">
+<meta property="og:title" content="WWelcome to my blog">
+<meta property="og:url" content="https://DengMFJ.github.io./2019/08/13/listDelete/index.html">
 <meta property="og:site_name" content="WWelcome to my blog">
-<meta property="og:description" content="@profile作用：可根据项目或开发者需求定制允许开发人员指定特定的组件来注册 Demo [@Configuration /*@Import(RedisConfig.class)*/ /*@Profile(&amp;quot;dev&amp;quot;)*/ public class SpringConfig {     @Bean     @Profile(&amp;quot;dev&amp;quot;)     publi">
+<meta property="og:description" content="title:list安全删除import java.util.ArrayList;import java.util.Iterator;import java.util.List;import java.util.concurrent.CopyOnWriteArrayList; public class ListDemo {    public static void main(String[]">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-12T07:17:33.614Z">
+<meta property="og:updated_time" content="2019-08-13T03:31:10.794Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spring之@profile注解">
-<meta name="twitter:description" content="@profile作用：可根据项目或开发者需求定制允许开发人员指定特定的组件来注册 Demo [@Configuration /*@Import(RedisConfig.class)*/ /*@Profile(&amp;quot;dev&amp;quot;)*/ public class SpringConfig {     @Bean     @Profile(&amp;quot;dev&amp;quot;)     publi">
+<meta name="twitter:title" content="WWelcome to my blog">
+<meta name="twitter:description" content="title:list安全删除import java.util.ArrayList;import java.util.Iterator;import java.util.List;import java.util.concurrent.CopyOnWriteArrayList; public class ListDemo {    public static void main(String[]">
   
     <link rel="alternative" href="/atom.xml" title="WWelcome to my blog" type="application/atom+xml">
   
@@ -154,101 +154,15 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-SpringProfile" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-listDelete" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      spring之@profile注解
-    </h1>
-  
-
-        
-        <a href="/2019/08/12/SpringProfile/" class="archive-article-date">
-  	<time datetime="2019-08-12T06:57:33.838Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-12</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code>@profile作用：可根据项目或开发者需求定制允许开发人员指定特定的组件来注册
-Demo
-[@Configuration
-/*@Import(RedisConfig.class)*/
-/*@Profile(&quot;dev&quot;)*/
-public class SpringConfig {
-    @Bean
-    @Profile(&quot;dev&quot;)
-    public ClientDao clientDao(){
-        return new ClientDaoImpl();
-    }
-    @Bean
-    @Profile(&quot;dev&quot;)
-    public ClientService clientService(){
-        ClientService clientService = new ClientService();
-        clientService.setClientDao(clientDao());
-        return clientService;
-    }
+        <hr>
+<h2 id="title-list安全删除"><a href="#title-list安全删除" class="headerlink" title="title:list安全删除"></a>title:list安全删除</h2><p>import java.util.ArrayList;<br>import java.util.Iterator;<br>import java.util.List;<br>import java.util.concurrent.CopyOnWriteArrayList;</p>
+<p>public class ListDemo {<br>    public static void main(String[] args) {<br>        List<string> list = new ArrayList&lt;&gt;();<br>        list.add(“11”);<br>        list.add(“22”);<br>        list.add(“22”);<br>        list.add(“33”);<br>        list.add(“44”);<br>        System.out.println(list);<br>        //remove(list,”22”);<br>        List list1 = copyOnWriteArrayListRemove(list, “22”);<br>        System.out.println(list1);<br>    }<br>    //错误 java.util.ConcurrentModificationException 会产生并发问题<br>   /* private static void remove(List<string> list, String s) {<br>        for (String s1 : list) {<br>            if(s.equals(s1)){<br>                list.remove(s1);<br>            }<br>        }<br>    }<em>/<br>    //错误 删除不完整 运行结果[11, 22, 33, 44] s=”22”<br>    //(1)index 0   1   2   3   4<br>    //原因 由于[11, 22, 22, 33, 44]集合开始长度为5，当集合遍历到1时,item=”22”进行删除该元素，<br>    //           (2)index       0   1   2   3<br>    // 并且该集合元素总体往前挪一位[11, 22, 33, 44] i=1 ===&gt;&gt; i++之后 i = 2；所以item得到的值 list.get(i)为”33”把第二个”22”给忽略掉<br>    /*private static void remove(List<string> list, String s) {<br>        for(int i = 0; i &lt; list.size(); i++){<br>            String item = list.get(i);<br>            if(s.equals(item)){<br>                list.remove(item);<br>            }<br>        }<br>    }</string></em>/<br>    //正确 运行结果[11, 33, 44]<br>    /<em>private static void remove(List<string> list, String s) {<br>        Iterator<string> iterator = list.iterator();<br>        while(iterator.hasNext()){<br>            String s1 = iterator.next();<br>            if(s.equals(s1)){<br>                iterator.remove();<br>            }<br>        }<br>    }</string></string></em>/<br>    //正确 运行结果[11, 33, 44]<br>    /<em>private static void remove(List<string> list, String s) {<br>        for (int i = list.size() - 1; i &gt;= 0; i–){<br>            String s1 = list.get(i);<br>            if (s.equals(s1)){<br>                list.remove(s);<br>            }<br>        }<br>    }</string></em>/<br>    //正确 java8 使用lambda表达式删除列表元素 运行结果[11, 33, 44]<br>    /<em>private static void remove(List<string> list, String s) {<br>        //lambda表达式的方法<br>       list.removeIf(e -&gt; s.equals(e));<br>    }</string></em>/<br>    //正确 运行结果[11, 33, 44]<br>    private static List copyOnWriteArrayListRemove(List<string> list, String s){<br>        CopyOnWriteArrayList<string> cList = new CopyOnWriteArrayList&lt;&gt;(list);<br>        for (String s1 : cList) {<br>            if (s.equals(s1)){<br>                cList.remove(s1);<br>            }<br>        }<br>       return cList;<br>    }<br>}</string></string></string></string></p>
 
-    @Bean
-    @Profile(&quot;dev&quot;)
-    public ClientService clientService1(){
-        ClientService clientService1 = new ClientService();
-        clientService1.setClientDao(clientDao());
-        return clientService1;
-    }
-}]
-测试代码没有激活&quot;dev&quot;
-[
-    public static void main(String[] args) throws SQLException {
-
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.register(SpringConfig.class);
-        context.refresh();
-
-        //dataSourceTest(context);
-        //redisTest(context);
-        //System.out.println(getValueByRedis(context));
-        getBeanNames(context);
-
-    }
-    public static void getBeanNames(AnnotationConfigApplicationContext context){
-        String[] names = context.getBeanDefinitionNames();
-        System.out.println(&quot;bean的总数：&quot;+names.length);
-        for (String name : names) {
-            System.out.println(name);
-        }
-    }]
-    测试结果
-    [
-        bean的总数：7
-        org.springframework.context.annotation.internalConfigurationAnnotationProcessor
-        org.springframework.context.annotation.internalAutowiredAnnotationProcessor
-        org.springframework.context.annotation.internalRequiredAnnotationProcessor
-        org.springframework.context.annotation.internalCommonAnnotationProcessor
-        org.springframework.context.event.internalEventListenerProcessor
-        org.springframework.context.event.internalEventListenerFactory
-        springConfig
-    ]
-    测试代码激活&quot;dev&quot;
-    [
-        bean的总数：10
-        org.springframework.context.annotation.internalConfigurationAnnotationProcessor
-        org.springframework.context.annotation.internalAutowiredAnnotationProcessor
-        org.springframework.context.annotation.internalRequiredAnnotationProcessor
-        org.springframework.context.annotation.internalCommonAnnotationProcessor
-        org.springframework.context.event.internalEventListenerProcessor
-        org.springframework.context.event.internalEventListenerFactory
-        springConfig
-        =======================
-        clientDao
-        clientService
-        clientService1
-        ========================
-    ]</code></pre>
       
 
       
@@ -327,7 +241,7 @@ public class SpringConfig {
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://DengMFJ.github.io./2019/08/12/SpringProfile/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://DengMFJ.github.io./2019/08/13/listDelete/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -341,18 +255,9 @@ public class SpringConfig {
   
 <nav id="article-nav">
   
-    <a href="/2019/08/13/listDelete/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/30/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">关于IDEA 创建java项目出现（错误：找不到或无法加载主类）</div>
+    <a href="/2019/08/12/SpringProfile/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">spring之@profile注解</div>
       <i class="icon-circle-right"></i>
     </a>
   
