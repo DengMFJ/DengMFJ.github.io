@@ -223,6 +223,8 @@
         for (String s1 : cList) {
             if (s.equals(s1)){
                 cList.remove(s1);
+                //注意别这样删除,java.util.ConcurrentModificationException 会产生并发问题
+                //list.remove(s1);
             }
         }
        return cList;

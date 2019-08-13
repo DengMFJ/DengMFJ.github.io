@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="WWelcome to my blog">
 <meta property="og:description" content="title:list安全删除主要有四种 public class ListDemo {     public static void main(String[] args) {         List&amp;lt;String&amp;gt; list = new ArrayList&amp;lt;&amp;gt;();         list.add(&amp;quot;11&amp;quot;);         list.add(">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-13T04:04:16.786Z">
+<meta property="og:updated_time" content="2019-08-13T04:07:12.406Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WWelcome to my blog">
 <meta name="twitter:description" content="title:list安全删除主要有四种 public class ListDemo {     public static void main(String[] args) {         List&amp;lt;String&amp;gt; list = new ArrayList&amp;lt;&amp;gt;();         list.add(&amp;quot;11&amp;quot;);         list.add(">
@@ -225,6 +225,8 @@
         for (String s1 : cList) {
             if (s.equals(s1)){
                 cList.remove(s1);
+                //注意别这样删除,java.util.ConcurrentModificationException 会产生并发问题
+                //list.remove(s1);
             }
         }
        return cList;
